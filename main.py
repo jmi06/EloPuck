@@ -285,7 +285,7 @@ def socialPost(id):
     team_1 = games[id]['team_1']
     team_2 = games[id]['team_2']
     
-    font_path = 'assets/Roboto-Bold.ttf' 
+    font_path = 'assets/Ubuntu-Bold.ttf' 
     font_prop = font_manager.FontProperties(fname=font_path)
     os.system(f"wget -O team_1.png {team_1['logo']}")
     os.system(f"wget -O team_2.png {team_2['logo']}")
@@ -347,7 +347,7 @@ def socialPost(id):
     ax.text(1300, 300, f"{team_2['record']}", fontsize=30, color=text, ha='center', va='center',fontproperties=font_prop)
     
     
-    ax.text(800, 0, f"elopuck.pages.dev", fontsize=20, color=text, ha='center', va='center',fontproperties=font_prop)
+    ax.text(800, 0, f"QuantusSports.pages.dev", fontsize=20, color=text, ha='center', va='center',fontproperties=font_prop)
 
 
     # Overlay team logos
