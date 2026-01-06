@@ -425,6 +425,8 @@ def calc_order():
 
 
 
+
+    order['predictionAccuracy'] = predictionAccuracy()
     
 
 
@@ -438,6 +440,41 @@ def calc_order():
 
 
 
+
+
+def predictionAccuracy():
+
+    correct = 0
+    wrong = 0
+    tie = 0
+
+    with open('games.json', 'r') as file:
+        games = json.load(file)
+
+    for game in games.values():
+        print(game)
+        team1Elo = float(game['team_1']['elo_before'])
+        team2Elo = float(game['team_2']['elo_before'])
+
+        team1Prob = 1 / (1+10** ((team2Elo-team1Elo)/400) )
+        team2Prob = 1 / (1+10** ((team1Elo-team2Elo)/400) )
+
+        if team1Prob > team2Prob and game['team_1']['winner'] == True:
+            correct +=1
+        if team1Prob < team2Prob and game['team_2']['winner'] == True:
+            correct +=1
+        if team1Prob > team2Prob and game['team_1']['winner'] == False:
+            wrong+=1
+        if team1Prob < team2Prob and game['team_2']['winner'] == False:
+            wrong+=1
+        if team1Prob == team2Prob:
+            tie+=1
+
+    toDump = {"acc": f"{correct}-{wrong}-{tie}"}
+
+    return toDump
+        
+        
 
 
 

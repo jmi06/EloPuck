@@ -56,35 +56,15 @@ def byGame():
         df.to_csv('eloGame.csv')
 
 
-        toDump = {"byDate": dfString}
-
-        #ADD TEAMS TO THE ELO DB
-        GAMES_API_TOKEN = os.getenv('GAMES_API_TOKEN')
-
-        GAMES_ACCOUNT_ID = os.getenv('GAMES_ACCOUNT_ID')
-        GAMES_NAMESPACE_ID = os.getenv('GAMES_NAMESPACE_ID')
+    with open('order.json', 'r') as file:
+        orderFile = json.load(file)
 
 
+    orderFile['byGame'] = df.to_string()
 
+    with open('order.json', 'w') as file:
+        json.dump(orderFile, file)
 
-        BASE_URL = f"https://api.cloudflare.com/client/v4/accounts/{GAMES_ACCOUNT_ID}/storage/kv/namespaces/{GAMES_NAMESPACE_ID}/values/byGame"
-
-        HEADERS = {
-            "Authorization": f"Bearer {GAMES_API_TOKEN}",
-            "Content-Type": "application/json"
-        }
-
-        try:
-            response = requests.get(BASE_URL, headers=HEADERS)
-            response = requests.put(
-                BASE_URL,
-                headers=HEADERS,
-                data=json.dumps(toDump)
-            )
-            print('Games Added')
-        except:
-            print('error')
-            return
 
 
 
@@ -117,35 +97,15 @@ def byDate():
         df.to_csv('eloDate.csv')
 
 
-        toDump = {"byDate": dfString}
-
-        #ADD TEAMS TO THE ELO DB
-        GAMES_API_TOKEN = os.getenv('GAMES_API_TOKEN')
-
-        GAMES_ACCOUNT_ID = os.getenv('GAMES_ACCOUNT_ID')
-        GAMES_NAMESPACE_ID = os.getenv('GAMES_NAMESPACE_ID')
+    with open('order.json', 'r') as file:
+        orderFile = json.load(file)
 
 
+    orderFile['byDate'] = df.to_string()
 
+    with open('order.json', 'w') as file:
+        json.dump(orderFile, file)
 
-        BASE_URL = f"https://api.cloudflare.com/client/v4/accounts/{GAMES_ACCOUNT_ID}/storage/kv/namespaces/{GAMES_NAMESPACE_ID}/values/byDate"
-
-        HEADERS = {
-            "Authorization": f"Bearer {GAMES_API_TOKEN}",
-            "Content-Type": "application/json"
-        }
-
-        try:
-            response = requests.get(BASE_URL, headers=HEADERS)
-            response = requests.put(
-                BASE_URL,
-                headers=HEADERS,
-                data=json.dumps(toDump)
-            )
-            print('Games Added')
-        except:
-            print('error')
-            return
 
 
 
@@ -153,3 +113,35 @@ def byDate():
 
 byDate()
 byGame()
+
+
+
+with open('order.json','r') as file:
+    orderedFile = file
+
+#ADD TEAMS TO THE ELO DB
+GAMES_API_TOKEN = os.getenv('GAMES_API_TOKEN')
+
+GAMES_ACCOUNT_ID = os.getenv('GAMES_ACCOUNT_ID')
+GAMES_NAMESPACE_ID = os.getenv('GAMES_NAMESPACE_ID')
+
+
+
+
+BASE_URL = f"https://api.cloudflare.com/client/v4/accounts/{GAMES_ACCOUNT_ID}/storage/kv/namespaces/{GAMES_NAMESPACE_ID}/values/byGame"
+
+HEADERS = {
+    "Authorization": f"Bearer {GAMES_API_TOKEN}",
+    "Content-Type": "application/json"
+}
+
+try:
+    response = requests.get(BASE_URL, headers=HEADERS)
+    response = requests.put(
+        BASE_URL,
+        headers=HEADERS,
+        data=json.dumps(orderedFile)
+    )
+    print('Games Added')
+except:
+    print('error')
