@@ -117,17 +117,16 @@ def create_post():
     with open('post.json') as postfile:
         postinfo = json.load(postfile)
 
-    posttext = f"NHL EloPuck Update as of {formatted_time}: \n{postinfo['winning_team']} beat {postinfo['losing_team']} {postinfo['score']} \nSee more at https://elopuck.pages.dev/ \n#NHL"
-    posttextX = f"NHL EloPuck Update as of {formatted_time}: \n{postinfo['winning_team']} beat {postinfo['losing_team']} {postinfo['score']} \nSee more at https://elopuck.pages.dev/ \n#NHL\n{mlb_team_hashtags[postinfo['winning_team']]}\n{mlb_team_hashtags[postinfo['losing_team']]}"
+    posttext = f"QuantusHockey Update as of {formatted_time}: \n{postinfo['winning_team']} beat {postinfo['losing_team']} {postinfo['score']} \nSee more at https://quantussports.pages.dev/ \n#NHL"
 
 
     facets = [
         {
             "index": {
-                "byteStart": posttext.find("https://elopuck.pages.dev/"),
-                "byteEnd": posttext.find("https://elopuck.pages.dev/") + len("https://elopuck.pages.dev/")
+                "byteStart": posttext.find("https://quantussports.pages.dev/"),
+                "byteEnd": posttext.find("https://quantussports.pages.dev/") + len("https://quantussports.pages.dev/")
             },
-            "features": [{"$type": "app.bsky.richtext.facet#link", "uri": "https://elopuck.pages.dev/"}]
+            "features": [{"$type": "app.bsky.richtext.facet#link", "uri": "https://quantussports.pages.dev/"}]
         },
         {
             "index": {
