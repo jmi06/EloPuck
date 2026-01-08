@@ -32,6 +32,8 @@ def create_post():
         "Colorado Avalanche": "#GoAvsGo",
         "Columbus Blue Jackets": "#CBJ",
         "Dallas Stars": "#TexasHockey",
+        "Utah Mammoth": "#UtahMammoth",
+
         "Detroit Red Wings": "#LGRW",
         "Edmonton Oilers": "#LetsGoOilers",
         "Florida Panthers": "#TimeToHunt",
